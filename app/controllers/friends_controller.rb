@@ -1,6 +1,6 @@
 class FriendsController < ApplicationController
   before_action :set_friend, only: %i[ show edit update destroy ]
-  #before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :correct_user, only: [:edit, :update, :destroy]
 
   # GET /friends or /friends.json
@@ -63,10 +63,10 @@ class FriendsController < ApplicationController
   end
 
 
-  # def correct_user
-  #   @friend = correct_user.friends.find_by(id: params[:id])
-  #   redirect_to friends_path, notice: "You are not authorized to edit this friend" if @friend.nil?
-  # end
+  def correct_user
+    @friend = correct_user.friends.find_by(id: params[:id])
+    redirect_to friends_path, notice: "You are not authorized to edit this friend" if @friend.nil?
+  end
   
   private
     # Use callbacks to share common setup or constraints between actions.
